@@ -15,6 +15,10 @@ def fetch_law_list_and_detail(query, unit):
     encoded_query = quote(keyword)
     url = f"{BASE}/DRF/lawSearch.do?OC={OC}&APIKEY={API_KEY}&target=law&type=XML&display=10&search=2&knd=A0002&query={encoded_query}"
 
+    print(f"[DEBUG] ▶ 검색 요청 URL: {url}")
+    print(f"[DEBUG] ▶ 응답 상태 코드: {res.status_code}")
+    print(f"[DEBUG] ▶ 응답 본문 일부:\n{res.text[:500]}")
+
     res = requests.get(url)
     res.encoding = "utf-8"
     if res.status_code != 200:
