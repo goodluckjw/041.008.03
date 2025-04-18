@@ -15,6 +15,10 @@ def parse_law_xml(xml_data, terms, unit):
     import xml.etree.ElementTree as ET
     tree = ET.fromstring(xml_data)
     articles = tree.findall(".//조문")
+    print(f"[DEBUG] ▶ terms: {terms}")
+    print(f"[DEBUG] ▶ unit: {unit}")
+    print(f"[DEBUG] ▶ 조문 수: {len(articles)}")
+
 
     results = []
 
@@ -23,6 +27,10 @@ def parse_law_xml(xml_data, terms, unit):
         include = [t for t in terms if not t.startswith('-') and t in cleaned]
         exclude = [t[1:] for t in terms if t.startswith('-')]
         return all(i in cleaned for i in include) and not any(e in cleaned for e in exclude)
+        print(f"[DEBUG] ▶ 검사 중 텍스트: {cleaned}")
+        print(f"[DEBUG] ▶ 포함 조건: {include}")
+        print(f"[DEBUG] ▶ 제외 조건: {exclude}")
+
 
     for article in articles:
         jo = article.findtext("조번호", "").strip()
