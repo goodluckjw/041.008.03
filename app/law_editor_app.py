@@ -32,6 +32,7 @@ unit = st.radio("검색 단위", ["법률", "조", "항"], horizontal=True)
 col1, col2 = st.columns(2)
 with col1:
     if st.button("법률 검색") and query:
+        print(f"[DEBUG] 🔍 검색 버튼 클릭됨! query = {query}, unit = {unit}")
         with st.spinner(f"🔎 '{query}'을(를) 포함하는 조문을 검색 중입니다..."):
             results = fetch_law_list_and_detail(query, unit)
             for law in results:
